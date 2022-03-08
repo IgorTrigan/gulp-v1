@@ -1,4 +1,4 @@
-const { src, dest, watch } = require('gulp')
+const { src, dest, watch, series, parallel } = require('gulp')
 
 const fileInclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
@@ -25,3 +25,6 @@ const watcher = () => {
 
 exports.html = html
 exports.watch = watcher
+
+//assembly
+exports.dev = series(html, watcher)
