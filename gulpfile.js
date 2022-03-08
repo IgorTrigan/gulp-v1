@@ -1,4 +1,4 @@
-const { src, dest } = require('gulp')
+const { src, dest, watch } = require('gulp')
 
 const fileInclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
@@ -16,5 +16,12 @@ const html = () => {
     .pipe(size({ title: 'After data compression' }))
     .pipe(dest('./public'))
 }
+//watchers
+const watcher = () => {
+  watch('./src/html/**/*.html', html)
+}
+
+// Tasks
 
 exports.html = html
+exports.watch = watcher
