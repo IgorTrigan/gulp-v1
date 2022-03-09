@@ -3,11 +3,11 @@ extends layout/app
 block page 
   include chunk/header
 
-  h1 Main !!
+  h1.title Main !
 
-  ul 
-    each item in news 
-      li= item.name 
+  ul.news 
+    each item in news
+      li= item.name
 
   include chunk/footer
 

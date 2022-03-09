@@ -1,5 +1,9 @@
 const { src, dest } = require('gulp')
 
+//Configuration
+const path = require('../config/path.js')
+const app = require('../config/app.js')
+
 //Plugins
 const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
@@ -9,7 +13,7 @@ const size = require('gulp-size')
 
 // prosessing HTML
 const html = () => {
-  return src('./src/html/*.html')
+  return src(path.html.src)
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
@@ -20,13 +24,9 @@ const html = () => {
     )
     .pipe(fileInclude())
     .pipe(size({ title: 'Before data compression' }))
-    .pipe(
-      htmlmin({
-        collapseWhitespace: true,
-      })
-    )
+    .pipe(htmlmin(app.htmlmin))
     .pipe(size({ title: 'After data compression' }))
-    .pipe(dest('./public'))
+    .pipe(dest(path.html.dest))
 }
 
 module.exports = html
