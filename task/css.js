@@ -12,6 +12,8 @@ const cssimport = require('gulp-cssimport')
 const autoprefixer = require('gulp-autoprefixer')
 const csso = require('gulp-csso')
 const rename = require('gulp-rename')
+const size = require('gulp-size')
+const shorthand = require('gulp-shorthand')
 
 // Prosessing CSS
 
@@ -28,9 +30,12 @@ const css = () => {
     .pipe(concat('main.css'))
     .pipe(cssimport())
     .pipe(autoprefixer())
+    .pipe(shorthand())
+    .pipe(size({ title: 'main.css' }))
     .pipe(dest(path.css.dest, { sourcemaps: true }))
     .pipe(rename({ suffix: '.min' }))
     .pipe(csso())
+    .pipe(size({ title: 'main.css' }))
     .pipe(dest(path.css.dest, { sourcemaps: true }))
 }
 
