@@ -10,6 +10,8 @@ const notify = require('gulp-notify')
 const concat = require('gulp-concat')
 const cssimport = require('gulp-cssimport')
 const autoprefixer = require('gulp-autoprefixer')
+const csso = require('gulp-csso')
+const rename = require('gulp-rename')
 
 // Prosessing CSS
 
@@ -26,6 +28,9 @@ const css = () => {
     .pipe(concat('main.css'))
     .pipe(cssimport())
     .pipe(autoprefixer())
+    .pipe(dest(path.css.dest, { sourcemaps: true }))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(csso())
     .pipe(dest(path.css.dest, { sourcemaps: true }))
 }
 
