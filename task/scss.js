@@ -14,6 +14,7 @@ const size = require('gulp-size')
 const shorthand = require('gulp-shorthand')
 const groupCssMediaQueries = require('gulp-group-css-media-queries')
 const sass = require('gulp-sass')(require('sass'))
+const sassGlob = require('gulp-sass-glob')
 
 // Prosessing SCSS
 
@@ -27,6 +28,7 @@ const scss = () => {
         })),
       })
     )
+    .pipe(sassGlob())
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(shorthand())
