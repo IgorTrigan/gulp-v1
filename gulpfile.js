@@ -1,12 +1,13 @@
 const { src, dest, watch, series, parallel } = require('gulp')
 const browserSync = require('browser-sync').create()
+const del = require('del')
 
 //Plugins
+const plumber = require('gulp-plumber')
+const notify = require('gulp-notify')
 const fileInclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
 const size = require('gulp-size')
-const plumber = require('gulp-plumber')
-const notify = require('gulp-notify')
 
 const html = () => {
   return src('./src/html/*.html')
@@ -29,9 +30,10 @@ const html = () => {
     .pipe(dest('./public'))
     .pipe(browserSync.stream())
 }
-//watchers
-const watcher = () => {
-  watch('./src/html/**/*.html', html)
+
+//deleting directory
+const clear = () => {
+  return del('./public')
 }
 
 //server
@@ -43,10 +45,16 @@ const server = () => {
   })
 }
 
+//watchers
+const watcher = () => {
+  watch('./src/html/**/*.html', html)
+}
+
 // Tasks
 
 exports.html = html
 exports.watch = watcher
+exports.clear = clear
 
 //assembly
-exports.dev = series(html, parallel(watcher, server))
+exports.dev = series(clear, html, parallel(watcher, server))
