@@ -8,4 +8,5 @@ module.exports = {
       news: require('../data/news.json'),
     },
   },
+  webpack: { mode: 'development' },
 }
