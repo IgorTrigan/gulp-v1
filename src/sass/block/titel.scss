@@ -1,0 +1,7 @@
+.titel {
+  text-transform: uppercase;
+
+  @include ph {
+    text-align: center;
+  }
+}
