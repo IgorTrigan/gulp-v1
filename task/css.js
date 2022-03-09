@@ -14,6 +14,7 @@ const csso = require('gulp-csso')
 const rename = require('gulp-rename')
 const size = require('gulp-size')
 const shorthand = require('gulp-shorthand')
+const groupCssMediaQueries = require('gulp-group-css-media-queries')
 
 // Prosessing CSS
 
@@ -31,6 +32,7 @@ const css = () => {
     .pipe(cssimport())
     .pipe(autoprefixer())
     .pipe(shorthand())
+    .pipe(groupCssMediaQueries())
     .pipe(size({ title: 'main.css' }))
     .pipe(dest(path.css.dest, { sourcemaps: true }))
     .pipe(rename({ suffix: '.min' }))
