@@ -1,12 +1,15 @@
 const { src, dest, watch, series, parallel } = require('gulp')
 const browserSync = require('browser-sync').create()
 
+//Plugins
 const fileInclude = require('gulp-file-include')
 const htmlmin = require('gulp-htmlmin')
 const size = require('gulp-size')
+const plumber = require('gulp-plumber')
 
 const html = () => {
   return src('./src/html/*.html')
+    .pipe(plumber())
     .pipe(fileInclude())
     .pipe(size({ title: 'Before data compression' }))
     .pipe(
