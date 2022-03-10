@@ -3,6 +3,7 @@ const browserSync = require('browser-sync').create()
 
 //Configuration
 const path = require('./config/path.js')
+const app = require('./config/app.js')
 
 //Tasks
 const clear = require('./task/clear.js')
@@ -30,6 +31,9 @@ const watcher = () => {
   watch(path.font.watch, font).on('all', browserSync.reload)
 }
 
+const build = series(clear, parallel(pug, scss, js, img, font))
+
+const dev = series(build, parallel(watcher, server))
 // Tasks
 
 exports.pug = pug
@@ -39,8 +43,4 @@ exports.img = img
 exports.font = font
 
 //assembly
-exports.dev = series(
-  clear,
-  parallel(pug, scss, js, img, font),
-  parallel(watcher, server)
-)
+exports.default = app.isProd ? build : dev
