@@ -9,6 +9,7 @@ const plumber = require('gulp-plumber')
 const notify = require('gulp-notify')
 const imagemin = require('gulp-imagemin')
 const newer = require('gulp-newer')
+const webp = require('gulp-webp')
 // Prosessing Image
 
 const img = () => {
@@ -21,6 +22,10 @@ const img = () => {
         })),
       })
     )
+    .pipe(newer(path.img.dest))
+    .pipe(webp())
+    .pipe(dest(path.img.dest))
+    .pipe(src(path.img.src))
     .pipe(newer(path.img.dest))
     .pipe(imagemin(app.imagemin))
     .pipe(dest(path.img.dest))

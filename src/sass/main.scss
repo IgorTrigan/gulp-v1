@@ -14,6 +14,7 @@ body {
   font-size: $base-font-size;
   font-family: Arial;
   line-height: 1.5;
+  background: url('../img/some.jpg') no-repeat center;
 
   @include ph {
     color: #fff;
