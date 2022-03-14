@@ -15,11 +15,11 @@ const task = requireDir('./task', { recurse: true })
 
 //watchers
 const watcher = () => {
-  watch($.path.pug.watch, task.pug)
-  watch($.path.scss.watch, task.scss)
-  watch($.path.js.watch, task.js)
-  watch($.path.img.watch, task.img)
-  watch($.path.font.watch, ftask.ont)
+  $.gulp.watch($.path.pug.watch, task.pug)
+  $.gulp.watch($.path.scss.watch, task.scss)
+  $.gulp.watch($.path.js.watch, task.js)
+  $.gulp.watch($.path.img.watch, task.img)
+  $.gulp.watch($.path.font.watch, task.ont)
 }
 
 const build = $.gulp.series(
